@@ -6,6 +6,10 @@ const app = express();
 const PORT = process.env.PORT || process.env.RATE_BOT_PORT || 3000;
 const defaultCurrency = process.RATE_BOT_DEFAULT_CURR || 'JPY';
 
+app.get('/', (req, res) => {
+  res.send('It works!');
+});
+
 app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
   const { query } = req;
 
