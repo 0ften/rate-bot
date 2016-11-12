@@ -1,0 +1,12 @@
+{
+  "name": "rate-bot",
+  "description": "Getting currency rate in BoT",
+  "repository": "https://github.com/0ften/rate-bot",
+  "env": {
+    "RATE_BOT_TOKEN": {
+      "description": "Slash command token",
+      "required": true
+    }
+	},
+  "image": "heroku/nodejs"
+}
