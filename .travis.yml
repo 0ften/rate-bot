@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "6"
+  - "6.1"
+  - "6.9.1"
+  - "7"
+  - "7.1"
+notifications:
+    slack: 0ften:xDGh8KJbViT0DcY3KKjW0KYG
