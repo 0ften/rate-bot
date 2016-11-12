@@ -1,3 +1,4 @@
+import axios from 'axios';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { getCurrencyRate } from './RateBot';
@@ -12,8 +13,9 @@ app.get('/', (req, res) => {
 
 app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
   const { query } = req;
+  const { token, response_url } = query;
 
-  if (query.token !== process.env.RATE_BOT_TOKEN) {
+  if (token !== process.env.RATE_BOT_TOKEN) {
     res.json({
       response_type: 'ephemeral',
       text: 'You might not setup your token in env.',
@@ -23,9 +25,11 @@ app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
 
   const text = (query.text && query.text.toUpperCase()) || defaultCurrency;
 
+  res.status(200).end();
+
   getCurrencyRate({ currency: text })
     .then(rate => (
-      rate ? res.json({
+      rate ? axios.post(response_url, {
         response_type: 'in_channel',
         text: `
           Search rate of \`${text}\`
@@ -33,7 +37,7 @@ app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
           Buy: \`${rate[text].buy}\`
           Sell: \`${rate[text].sell}\`
         `,
-      }) : res.json({
+      }) : axios.post(response_url, {
         response_type: 'ephemeral',
         text: 'You search with wrong currency.',
       })
