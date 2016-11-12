@@ -1,5 +1,7 @@
 # rate-bot
 
+[![Build Status](https://travis-ci.org/0ften/rate-bot.svg?branch=master)](https://travis-ci.org/0ften/rate-bot)
+
 > Slack bot slash command for searching currency rate in [BoT](http://rate.bot.com.tw/xrt).
 
 ## Configuration
