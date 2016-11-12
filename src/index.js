@@ -3,10 +3,10 @@ import bodyParser from 'body-parser';
 import { getCurrencyRate } from './RateBot';
 
 const app = express();
-const PORT = process.env.RATE_BOT_PORT || 3000;
+const PORT = process.env.PORT || process.env.RATE_BOT_PORT || 3000;
 const defaultCurrency = process.RATE_BOT_DEFAULT_CURR || 'JPY';
 
-app.get('/', bodyParser.urlencoded({ extended: true }), (req, res) => {
+app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
   const { query } = req;
 
   if (query.token !== process.env.RATE_BOT_TOKEN) {
