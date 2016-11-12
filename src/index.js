@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
   const { query } = req;
-  const { token, response_url } = query;
+  const { token, user_name, response_url } = query;
 
   if (token !== process.env.RATE_BOT_TOKEN) {
     res.json({
@@ -32,7 +32,7 @@ app.get('/rate-bot', bodyParser.urlencoded({ extended: true }), (req, res) => {
       rate ? axios.post(response_url, {
         response_type: 'in_channel',
         text: `
-          Search rate of \`${text}\`
+          Search rate of \`${text}\` by @${user_name}
 
           Buy: \`${rate[text].buy}\`
           Sell: \`${rate[text].sell}\`
